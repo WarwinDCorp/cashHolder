@@ -14,8 +14,9 @@ import kotlinx.android.synthetic.main.recyclerview_item.*
 
 
 class NewCashActivity : AppCompatActivity() {
+    //TODO Переделать на автовыбор с экрана (возможно перечень вытягивать с RemoteConfig)
     private var data =
-        arrayOf("Автомобиль", "Продукты", "Спорт", "Кафе/Рестораны", "Другое")
+        arrayOf("Автомобиль", "Продукты", "Спорт", "Кафе/Рестораны", "Комунальные", "Другое")
     private lateinit var editSumView: EditText
 
     public override fun onCreate(savedInstanceState: Bundle?) {
