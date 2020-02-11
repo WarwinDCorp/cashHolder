@@ -1,6 +1,7 @@
 package hu.pe.warwind.cashHolder.Room
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -8,7 +9,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [CashTable::class], version = 1, exportSchema = false)
+@Database(entities = [CashTable::class], version = 2, exportSchema = false)
 public abstract class CashTableRoomDatabase : RoomDatabase() {
 
     abstract fun cashTableDao(): CashTableDao
@@ -20,23 +21,19 @@ public abstract class CashTableRoomDatabase : RoomDatabase() {
             super.onOpen(db)
             INSTANCE?.let { database ->
                 scope.launch {
-                    populateDatabase(database.cashTableDao())
+                    clearDatabase(database.cashTableDao())
+                    //getOutcome(database.cashTableDao())
                 }
             }
         }
-
-        suspend fun populateDatabase(cashTableDao: CashTableDao) {
-            // Delete all content here.
+        suspend fun clearDatabase(cashTableDao: CashTableDao){
             cashTableDao.deleteAll()
-
-            // Add sample words.
-            //TODO удалить автозаполнение
-            //val data = CashTable(1, Calendar.getInstance().time.toString(),"Автомобиль", 26.56, false)
-            //cashTableDao.insert(data)
-            //val data2 = CashTable(2, Calendar.getInstance().time.toString(),"Продукты", 112.48, false)
-            //cashTableDao.insert(data2)
-
         }
+
+        //suspend fun getOutcome(cashTableDao: CashTableDao){
+            //val outcome = cashTableDao.getOutcome()
+            //Log.d("ERROR", outcome.toString())
+        //}
     }
 
     companion object {
@@ -54,6 +51,7 @@ public abstract class CashTableRoomDatabase : RoomDatabase() {
                     "cash_database"
                 )
                     .addCallback(CashTableDatabaseCallback(scope))
+                    .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
                 //return instance

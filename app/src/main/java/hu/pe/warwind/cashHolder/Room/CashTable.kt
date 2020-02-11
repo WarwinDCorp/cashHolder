@@ -11,15 +11,15 @@ data class CashTable(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
 
-    @ColumnInfo (name = "Дата")
+    @ColumnInfo (name = "dateTime")
     val dateTime: String,
 
-    @ColumnInfo (name = "Категория")
+    @ColumnInfo (name = "category")
     val category: String,
 
     @ColumnInfo (name = "sum")
     val sum: Double,
 
-    @ColumnInfo (name = "Доход ли")
+    @ColumnInfo (name = "isIncome")
     val isIncome: Boolean
 )

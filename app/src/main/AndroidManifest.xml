@@ -13,8 +13,9 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
-        <activity android:name=".NewCashActivity"></activity>
-        <activity android:name=".BaseActivity"></activity>
+        <activity android:name=".CategoriesActivity"></activity>
+        <activity android:name=".NewCashActivity" />
+        <activity android:name=".BaseActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

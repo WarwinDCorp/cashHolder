@@ -29,14 +29,19 @@ class CashListAdapter internal constructor(
 
     override fun onBindViewHolder(holder: CashViewHolder, position: Int) {
         val current = cashTable[position]
-
+        val currentSum: String
         val formatter = SimpleDateFormat("dd.MM.yyyy hh:mm")
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = current.dateTime.toLong()
+        val currentTime = formatter.format(calendar.time)
 
-        holder.cashDate.text = formatter.format(calendar.time)
+        when (current.isIncome) {
+            true -> currentSum = "+ " + current.sum.toString()
+            false -> currentSum = "- " + current.sum.toString()
+        }
+        holder.cashDate.text = currentTime
         holder.cashCategory.text = current.category
-        holder.cashSum.text = current.sum.toString()
+        holder.cashSum.text = currentSum
     }
 
     internal fun setCash(cashTable: List<CashTable>) {
@@ -46,3 +51,5 @@ class CashListAdapter internal constructor(
 
     override fun getItemCount() = cashTable.size
     }
+
+
