@@ -1,13 +1,14 @@
 package hu.pe.warwind.cashHolder
 
 import android.content.Context
-import androidx.appcompat.view.menu.ActionMenuItemView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import hu.pe.warwind.cashHolder.Room.CashTable
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CashListAdapter internal constructor(
     context: Context
@@ -28,7 +29,12 @@ class CashListAdapter internal constructor(
 
     override fun onBindViewHolder(holder: CashViewHolder, position: Int) {
         val current = cashTable[position]
-        holder.cashDate.text = current.dateTime
+
+        val formatter = SimpleDateFormat("dd.MM.yyyy hh:mm")
+        val calendar = Calendar.getInstance()
+        calendar.timeInMillis = current.dateTime.toLong()
+
+        holder.cashDate.text = formatter.format(calendar.time)
         holder.cashCategory.text = current.category
         holder.cashSum.text = current.sum.toString()
     }

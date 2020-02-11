@@ -11,10 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import androidx.appcompat.widget.Toolbar
 import hu.pe.warwind.cashHolder.Room.CashTable
-import kotlinx.android.synthetic.main.activity_base.*
-import java.util.*
 
 class BaseActivity : AppCompatActivity() {
 
@@ -51,8 +48,7 @@ class BaseActivity : AppCompatActivity() {
             data?.getStringExtra(NewCashActivity.EXTRA_CAT)?.let {
                 val cashCat = data.getStringExtra(NewCashActivity.EXTRA_CAT)
                 val cashSum = data.getStringExtra(NewCashActivity.EXTRA_SUM).toDouble()
-
-                val cash = CashTable( 0, Calendar.getInstance().time.toString(),cashCat, cashSum, false)
+                val cash = CashTable( 0, System.currentTimeMillis().toString(),cashCat, cashSum, false)
                 cashViewModel.insert(cash)
             }
         } else if (resultCode == Activity.RESULT_CANCELED){

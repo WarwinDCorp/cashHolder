@@ -7,7 +7,6 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
-import java.util.*
 
 @Database(entities = [CashTable::class], version = 1, exportSchema = false)
 public abstract class CashTableRoomDatabase : RoomDatabase() {
@@ -28,7 +27,7 @@ public abstract class CashTableRoomDatabase : RoomDatabase() {
 
         suspend fun populateDatabase(cashTableDao: CashTableDao) {
             // Delete all content here.
-            //cashTableDao.deleteAll()
+            cashTableDao.deleteAll()
 
             // Add sample words.
             //TODO удалить автозаполнение

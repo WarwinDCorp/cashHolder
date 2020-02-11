@@ -5,16 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Spinner
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.recyclerview_item.*
 
 
 class NewCashActivity : AppCompatActivity() {
     //TODO Переделать на автовыбор с экрана (возможно перечень вытягивать с RemoteConfig)
+    private var currentCategory = "Другое"
     private var data =
         arrayOf("Автомобиль", "Продукты", "Спорт", "Кафе/Рестораны", "Комунальные", "Другое")
     private lateinit var editSumView: EditText
@@ -30,7 +27,16 @@ class NewCashActivity : AppCompatActivity() {
         val spinner = findViewById<View>(R.id.CategoryList) as Spinner
         spinner.adapter = adapter
         spinner.prompt = "Выберите категорию"
-        val category = spinner.selectedItem.toString()
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                currentCategory = spinner.selectedItem.toString()
+                Toast.makeText(applicationContext,currentCategory,Toast.LENGTH_LONG).show()
+            }
+        }
 
         editSumView = findViewById(R.id.editSum)
         //TODO настроить форму для возможности вносить данные
@@ -41,14 +47,13 @@ class NewCashActivity : AppCompatActivity() {
                 setResult(Activity.RESULT_CANCELED,replyIntent)
             } else {
                 val sum = editSumView.text.toString()
-                replyIntent.putExtra(EXTRA_CAT, category)
+                replyIntent.putExtra(EXTRA_CAT, currentCategory)
                 replyIntent.putExtra(EXTRA_SUM, sum)
                 setResult(Activity.RESULT_OK, replyIntent)
             }
             finish()
         }
     }
-
     companion object {
         const val EXTRA_CAT = "com.example.android.categorysql.REPLY"
         const val EXTRA_SUM = "com.example.android.sumsql.REPLY"

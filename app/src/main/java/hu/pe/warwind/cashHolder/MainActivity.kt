@@ -8,8 +8,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.widget.Toast
 import android.text.Editable
 import android.text.TextWatcher
-
-
 import android.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
