@@ -21,8 +21,8 @@ public abstract class CashTableRoomDatabase : RoomDatabase() {
             super.onOpen(db)
             INSTANCE?.let { database ->
                 scope.launch {
-                    clearDatabase(database.cashTableDao())
-                    //getOutcome(database.cashTableDao())
+                    //clearDatabase(database.cashTableDao())
+                    getOutcome(database.cashTableDao())
                 }
             }
         }
@@ -30,10 +30,12 @@ public abstract class CashTableRoomDatabase : RoomDatabase() {
             cashTableDao.deleteAll()
         }
 
-        //suspend fun getOutcome(cashTableDao: CashTableDao){
-            //val outcome = cashTableDao.getOutcome()
-            //Log.d("ERROR", outcome.toString())
-        //}
+        suspend fun getOutcome(cashTableDao: CashTableDao){
+            val outcome = cashTableDao.getOutcome()
+            if (outcome.isNotEmpty()){
+                Log.d("ERROR", outcome)
+            }
+        }
     }
 
     companion object {

@@ -18,7 +18,7 @@ interface CashTableDao {
     @Query("DELETE FROM cash_table")
     suspend fun deleteAll()
 
-    //@Query("SELECT sum FROM cash_table WHERE isIncome = :param LIMIT 1")
-    //suspend fun getOutcome(param: Boolean = false): Double
+    @Query("SELECT SUM(sum) FROM cash_table WHERE isIncome = :param")
+    suspend fun getOutcome(param: Boolean = false): String
 
 }
