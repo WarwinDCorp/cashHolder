@@ -9,4 +9,7 @@ class CashRepository(private val cashTableDao: CashTableDao) {
     suspend fun insert(cashTable: CashTable) {
         cashTableDao.insert(cashTable)
     }
+    suspend fun getOutcome(){
+        cashTableDao.getOutcome(false)
+    }
 }

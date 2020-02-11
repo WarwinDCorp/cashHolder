@@ -23,4 +23,8 @@ class CashViewModel(application: Application) : AndroidViewModel(application) {
     fun insert(cashTable: CashTable) = viewModelScope.launch {
         repository.insert(cashTable)
     }
+
+    fun getOutcome() = viewModelScope.launch {
+        repository.getOutcome()
+    }
 }
