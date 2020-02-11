@@ -12,13 +12,13 @@ interface CashTableDao {
     @Query("SELECT * FROM cash_table")
     fun getIncome(): LiveData<List<CashTable>>
 
+    @Query("SELECT SUM(sum) FROM cash_table WHERE isIncome = :param")
+    fun getOutcome(param: Boolean = false): String
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(CashTable: CashTable)
 
     @Query("DELETE FROM cash_table")
     suspend fun deleteAll()
-
-    @Query("SELECT SUM(sum) FROM cash_table WHERE isIncome = :param")
-    suspend fun getOutcome(param: Boolean = false): String
 
 }

@@ -13,18 +13,16 @@ class CashViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: CashRepository
 
     val allCash: LiveData<List<CashTable>>
+    val outCome: String
 
     init {
         val cashTableDao = CashTableRoomDatabase.getDatabase(application, viewModelScope).cashTableDao()
         repository = CashRepository(cashTableDao)
         allCash = repository.allCash
+        outCome = repository.outCome
     }
 
     fun insert(cashTable: CashTable) = viewModelScope.launch {
         repository.insert(cashTable)
-    }
-
-    fun getOutcome() = viewModelScope.launch {
-        repository.getOutcome()
     }
 }

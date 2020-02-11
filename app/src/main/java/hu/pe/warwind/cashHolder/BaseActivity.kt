@@ -33,8 +33,7 @@ class BaseActivity : AppCompatActivity() {
             cash ->
                 cash?.let { adapter.setCash(cash) }
         })
-        val outcome = cashViewModel.getOutcome()
-        Toast.makeText(applicationContext,outcome.toString(), Toast.LENGTH_LONG).show()
+
         val fab = findViewById<FloatingActionButton>(R.id.fab)
         fab.setOnClickListener {
             val intent = Intent(this@BaseActivity, NewCashActivity::class.java)
@@ -42,6 +41,11 @@ class BaseActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        val outcome = cashViewModel.outCome
+        Toast.makeText(applicationContext,outcome, Toast.LENGTH_LONG).show()
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 

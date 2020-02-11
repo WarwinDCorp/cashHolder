@@ -22,7 +22,7 @@ public abstract class CashTableRoomDatabase : RoomDatabase() {
             INSTANCE?.let { database ->
                 scope.launch {
                     //clearDatabase(database.cashTableDao())
-                    getOutcome(database.cashTableDao())
+                    //getOutcome(database.cashTableDao())
                 }
             }
         }
