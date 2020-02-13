@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +30,7 @@ class BaseActivity : AppCompatActivity() {
         cashViewModel = ViewModelProvider(this).get(CashViewModel::class.java)
         cashViewModel.allCash.observe(this, Observer {
             cash ->
+                // Update the cached copy of the words in the adapter
                 cash?.let { adapter.setCash(cash) }
         })
 
@@ -43,8 +43,9 @@ class BaseActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        val outcome = cashViewModel.outCome
-        Toast.makeText(applicationContext,outcome, Toast.LENGTH_LONG).show()
+        //val outcome = cashViewModel.outCome
+        //Toast.makeText(applicationContext,outcome, Toast.LENGTH_LONG).show()
+        //Toast.makeText(applicationContext,"123", Toast.LENGTH_LONG).show()
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -56,8 +57,8 @@ class BaseActivity : AppCompatActivity() {
                 val cash = CashTable( 0, System.currentTimeMillis().toString(),cashCat, cashSum, false)
                 cashViewModel.insert(cash)
             }
-        } else if (resultCode == Activity.RESULT_CANCELED){
-            Toast.makeText(applicationContext,"Ничего не записано", Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(applicationContext,R.string.empty_not_saved, Toast.LENGTH_LONG).show()
         }
     }
 }
