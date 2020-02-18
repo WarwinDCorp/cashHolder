@@ -13,7 +13,7 @@ class NewCashActivity : AppCompatActivity() {
     //TODO Переделать на автовыбор с экрана (возможно перечень вытягивать с RemoteConfig)
     private var currentCategory = "Другое"
     private var data =
-        arrayOf("Автомобиль", "Продукты", "Спорт", "Кафе/Рестораны", "Комунальные", "Другое")
+        arrayOf("Автомобиль", "Продукты", "Спорт", "Кафе", "Комунальные", "Мобильная связь", "Другое")
     private lateinit var editSumView: EditText
 
     public override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +26,12 @@ class NewCashActivity : AppCompatActivity() {
 
         val spinner = findViewById<View>(R.id.CategoryList) as Spinner
         spinner.adapter = adapter
-        spinner.prompt = "Выберите категорию"
+
+        val categoryFromActivity = intent.getStringExtra("category")
+        categoryFromActivity?.let{
+            //Toast.makeText(applicationContext,categoryFromActivity,Toast.LENGTH_LONG).show()
+            spinner.setSelection(data.indexOf(categoryFromActivity))
+        }
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -34,7 +39,6 @@ class NewCashActivity : AppCompatActivity() {
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 currentCategory = spinner.selectedItem.toString()
-                Toast.makeText(applicationContext,currentCategory,Toast.LENGTH_LONG).show()
             }
         }
 

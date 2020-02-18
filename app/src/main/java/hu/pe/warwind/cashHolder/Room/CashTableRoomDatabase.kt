@@ -21,20 +21,12 @@ public abstract class CashTableRoomDatabase : RoomDatabase() {
             super.onOpen(db)
             INSTANCE?.let { database ->
                 scope.launch {
-                    //clearDatabase(database.cashTableDao())
-                    //getOutcome(database.cashTableDao())
+                    clearDatabase(database.cashTableDao())
                 }
             }
         }
         suspend fun clearDatabase(cashTableDao: CashTableDao){
             cashTableDao.deleteAll()
-        }
-
-        suspend fun getOutcome(cashTableDao: CashTableDao){
-            val outcome = cashTableDao.getOutcome()
-            if (outcome.isNotEmpty()){
-                Log.d("ERROR", outcome)
-            }
         }
     }
 

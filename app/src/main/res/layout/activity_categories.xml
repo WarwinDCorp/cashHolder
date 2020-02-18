@@ -6,4 +6,104 @@
         android:layout_height="match_parent"
         tools:context=".CategoriesActivity">
 
+    <TextView
+            android:id="@+id/totalIncome"
+            style="@style/cash_income_outcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00,00"
+            android:textColor="#4CAF50"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+            android:id="@+id/totalOutcome"
+            style="@style/cash_income_outcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00,00"
+            android:textColor="@android:color/holo_red_dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/totalIncome" />
+
+    <ImageView
+            android:id="@+id/categoryAuto"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:contentDescription="Автомобиль"
+            app:layout_constraintBottom_toTopOf="@+id/totalIncome"
+            app:layout_constraintEnd_toStartOf="@+id/categoryProducts"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_directions_car_black_24dp" />
+
+    <ImageView
+            android:id="@+id/categorySport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Спорт"
+            app:layout_constraintBottom_toTopOf="@+id/totalIncome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/categoryProducts"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_fitness_center_black_24dp" />
+
+    <ImageView
+            android:id="@+id/categoryCafe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Кафе"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/categoryHome"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/totalOutcome"
+            app:srcCompat="@drawable/ic_restaurant_black_24dp" />
+
+    <ImageView
+            android:id="@+id/categoryProducts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Продукты"
+            app:layout_constraintBottom_toTopOf="@+id/totalIncome"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_local_dining_black_24dp" />
+
+    <ImageView
+            android:id="@+id/categoryHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Комунальные"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/totalOutcome"
+            app:srcCompat="@drawable/ic_home_black_24dp" />
+
+    <ImageView
+            android:id="@+id/categoryMobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Мобильная связь"
+            app:layout_constraintBottom_toTopOf="@+id/categoryCafe"
+            app:layout_constraintEnd_toStartOf="@+id/totalIncome"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/categoryAuto"
+            app:srcCompat="@drawable/ic_phone_android_black_24dp" />
+
+    <ImageView
+            android:id="@+id/categoryOther"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="Другое"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/categoryHome"
+            app:layout_constraintTop_toBottomOf="@+id/totalOutcome"
+            app:srcCompat="@drawable/ic_add_shopping_cart_black_24dp" />
+
 </android.support.constraint.ConstraintLayout>

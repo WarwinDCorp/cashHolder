@@ -46,7 +46,8 @@ class MainActivity : AppCompatActivity() {
 
 
         btnLogin.setOnClickListener {
-            val intent = Intent(this, BaseActivity::class.java)
+            //val intent = Intent(this, BaseActivity::class.java)
+            val intent = Intent(this, CategoriesActivity::class.java)
             startActivity(intent)
             //makeLogin()
         }

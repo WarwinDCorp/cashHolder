@@ -35,16 +35,18 @@ class BaseActivity : AppCompatActivity() {
         })
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
-        fab.setOnClickListener {
-            val intent = Intent(this@BaseActivity, NewCashActivity::class.java)
-            startActivityForResult(intent, newCashActivityRequestCode)
-        }
+
     }
 
     override fun onResume() {
         super.onResume()
-        //val outcome = cashViewModel.outCome
-        //Toast.makeText(applicationContext,outcome, Toast.LENGTH_LONG).show()
+        cashViewModel.outCome.observe(this, Observer {
+                outCome ->
+            outCome?.let { Toast.makeText(applicationContext,outCome.toString(), Toast.LENGTH_LONG).show() }
+            // Update the cached copy of the words in the adapter
+
+        })
+
         //Toast.makeText(applicationContext,"123", Toast.LENGTH_LONG).show()
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

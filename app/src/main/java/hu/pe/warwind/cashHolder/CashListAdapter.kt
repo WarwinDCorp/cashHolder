@@ -30,7 +30,8 @@ class CashListAdapter internal constructor(
     override fun onBindViewHolder(holder: CashViewHolder, position: Int) {
         val current = cashTable[position]
         val currentSum: String
-        val formatter = SimpleDateFormat("dd.MM.yyyy hh:mm")
+        //val formatter = SimpleDateFormat("dd.MM.yyyy hh:mm")
+        val formatter = SimpleDateFormat("dd.MM")
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = current.dateTime.toLong()
         val currentTime = formatter.format(calendar.time)

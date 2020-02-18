@@ -13,7 +13,7 @@ class CashViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: CashRepository
 
     val allCash: LiveData<List<CashTable>>
-    val outCome: String
+    val outCome: LiveData<Double>
 
     init {
         val cashTableDao = CashTableRoomDatabase.getDatabase(application, viewModelScope).cashTableDao()
