@@ -9,11 +9,14 @@ import androidx.room.Query
 @Dao
 interface CashTableDao {
 
-    @Query("SELECT * FROM cash_table")
-    fun getIncome(): LiveData<List<CashTable>>
+    @Query("SELECT * FROM cash_table ORDER BY dateTime DESC")
+    fun getAllTable(): LiveData<List<CashTable>>
 
-    @Query("SELECT SUM(sum) FROM cash_table WHERE isIncome = :param ORDER BY dateTime DESC")
+    @Query("SELECT SUM(sum) FROM cash_table WHERE isIncome = :param")
     fun getOutcome(param: Boolean = false): LiveData<Double>
+
+    @Query("SELECT SUM(sum) FROM cash_table WHERE isIncome = :param")
+    fun getIncome(param: Boolean = true): LiveData<Double>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(CashTable: CashTable)

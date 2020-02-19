@@ -14,11 +14,13 @@ class CashViewModel(application: Application) : AndroidViewModel(application) {
 
     val allCash: LiveData<List<CashTable>>
     val outCome: LiveData<Double>
+    val inCome: LiveData<Double>
 
     init {
         val cashTableDao = CashTableRoomDatabase.getDatabase(application, viewModelScope).cashTableDao()
         repository = CashRepository(cashTableDao)
         allCash = repository.allCash
+        inCome = repository.inCome
         outCome = repository.outCome
     }
 

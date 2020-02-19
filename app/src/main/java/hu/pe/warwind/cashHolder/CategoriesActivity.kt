@@ -15,16 +15,13 @@ class CategoriesActivity : AppCompatActivity() {
 
     private val newCashActivityRequestCode = 1
     private lateinit var cashViewModel: CashViewModel
+    private var realIncome: Double = 0.00
+    private var realOutcome: Double = 0.00
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_categories)
         cashViewModel = ViewModelProvider(this).get(CashViewModel::class.java)
-        cashViewModel.outCome.observe(this, Observer {
-                outCome ->
-            outCome?.let { findViewById<TextView>(R.id.totalOutcome).text = outCome.toString() }
-        })
-
         val products = findViewById<ImageView>(R.id.categoryProducts)
         val auto = findViewById<ImageView>(R.id.categoryAuto)
         val cafe = findViewById<ImageView>(R.id.categoryCafe)
@@ -54,12 +51,19 @@ class CategoriesActivity : AppCompatActivity() {
     }
     override fun onResume() {
         super.onResume()
-        cashViewModel.outCome.observe(this, Observer {
-                outCome ->
-            outCome?.let { findViewById<TextView>(R.id.totalOutcome).text = outCome.toString() }
+        //refreshCome()
+        //findViewById<TextView>(R.id.totalIncome).text = realInCome.toString()
+        //findViewById<TextView>(R.id.totalOutcome).text = (realInCome - realOutCome).toString()
 
-        })
     }
+
+    override fun onStart() {
+        super.onStart()
+        refreshCome()
+        findViewById<TextView>(R.id.totalIncome).text = realIncome.toString()
+            findViewById<TextView>(R.id.totalOutcome).text = "- " + realOutcome.toString()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -70,11 +74,27 @@ class CategoriesActivity : AppCompatActivity() {
                 val cash =
                     CashTable(0, System.currentTimeMillis().toString(), cashCat, cashSum, false)
                 cashViewModel.insert(cash)
+                refreshCome()
                 //Toast.makeText(applicationContext,cashCat + ": " + cashSum, Toast.LENGTH_LONG).show()
             }
 
         } else {
             Toast.makeText(applicationContext,R.string.empty_not_saved, Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun refreshCome(){
+        cashViewModel.inCome.observe(this, Observer {
+                inCome ->
+            inCome?.let {
+                realIncome = inCome
+            }
+        })
+        cashViewModel.outCome.observe(this, Observer {
+                outCome ->
+            outCome?.let {
+                realOutcome = outCome
+            }
+        })
     }
 }

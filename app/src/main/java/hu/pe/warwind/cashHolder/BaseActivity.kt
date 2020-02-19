@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import hu.pe.warwind.cashHolder.Room.CashTable
+import java.util.*
 
 class BaseActivity : AppCompatActivity() {
 
@@ -35,14 +36,18 @@ class BaseActivity : AppCompatActivity() {
         })
 
         val fab = findViewById<FloatingActionButton>(R.id.fab)
-
+        fab.setOnClickListener{
+            Toast.makeText(applicationContext,"НЕ ТЫКОЙ!", Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun onResume() {
         super.onResume()
         cashViewModel.outCome.observe(this, Observer {
                 outCome ->
-            outCome?.let { Toast.makeText(applicationContext,outCome.toString(), Toast.LENGTH_LONG).show() }
+            outCome?.let {
+                //Toast.makeText(applicationContext,outCome.toString(), Toast.LENGTH_LONG).show()
+            }
             // Update the cached copy of the words in the adapter
 
         })
