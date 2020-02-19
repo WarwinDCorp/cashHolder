@@ -10,17 +10,25 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import hu.pe.warwind.cashHolder.Room.CashTable
+import kotlinx.android.synthetic.main.activity_categories.*
+import org.w3c.dom.Text
 
 class CategoriesActivity : AppCompatActivity() {
 
     private val newCashActivityRequestCode = 1
     private lateinit var cashViewModel: CashViewModel
-    private var realIncome: Double = 0.00
-    private var realOutcome: Double = 0.00
+    lateinit var totalIncome: TextView
+    lateinit var totalOutcome: TextView
+    lateinit var totalCash: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_categories)
+
+        totalIncome = findViewById<TextView>(R.id.totalIncome)
+        totalOutcome = findViewById<TextView>(R.id.totalOutcome)
+        totalCash = findViewById<TextView>(R.id.totalCash)
+
         cashViewModel = ViewModelProvider(this).get(CashViewModel::class.java)
         val products = findViewById<ImageView>(R.id.categoryProducts)
         val auto = findViewById<ImageView>(R.id.categoryAuto)
@@ -51,17 +59,25 @@ class CategoriesActivity : AppCompatActivity() {
     }
     override fun onResume() {
         super.onResume()
-        //refreshCome()
-        //findViewById<TextView>(R.id.totalIncome).text = realInCome.toString()
-        //findViewById<TextView>(R.id.totalOutcome).text = (realInCome - realOutCome).toString()
 
     }
 
     override fun onStart() {
         super.onStart()
-        refreshCome()
-        findViewById<TextView>(R.id.totalIncome).text = realIncome.toString()
-            findViewById<TextView>(R.id.totalOutcome).text = "- " + realOutcome.toString()
+        //refreshCome()
+        cashViewModel.inCome.observe(this, Observer {
+                inCome ->
+            inCome?.let {
+                totalIncome.text = inCome.toString()
+            }
+        })
+        cashViewModel.outCome.observe(this, Observer {
+                outCome ->
+            outCome?.let {
+                totalOutcome.text = outCome.toString()
+            }
+        })
+        totalCash.text = "125.92"
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -74,7 +90,6 @@ class CategoriesActivity : AppCompatActivity() {
                 val cash =
                     CashTable(0, System.currentTimeMillis().toString(), cashCat, cashSum, false)
                 cashViewModel.insert(cash)
-                refreshCome()
                 //Toast.makeText(applicationContext,cashCat + ": " + cashSum, Toast.LENGTH_LONG).show()
             }
 
@@ -83,18 +98,4 @@ class CategoriesActivity : AppCompatActivity() {
         }
     }
 
-    private fun refreshCome(){
-        cashViewModel.inCome.observe(this, Observer {
-                inCome ->
-            inCome?.let {
-                realIncome = inCome
-            }
-        })
-        cashViewModel.outCome.observe(this, Observer {
-                outCome ->
-            outCome?.let {
-                realOutcome = outCome
-            }
-        })
-    }
 }

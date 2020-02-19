@@ -106,4 +106,17 @@
             app:layout_constraintTop_toBottomOf="@+id/totalOutcome"
             app:srcCompat="@drawable/ic_add_shopping_cart_black_24dp" />
 
+    <TextView
+            android:id="@+id/totalCash"
+            style="@style/cash_income_outcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:drawableStart="@drawable/ic_add_black_24dp"
+            android:text="00,00"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/totalOutcome" />
+
 </android.support.constraint.ConstraintLayout>

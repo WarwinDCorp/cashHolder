@@ -18,6 +18,9 @@ interface CashTableDao {
     @Query("SELECT SUM(sum) FROM cash_table WHERE isIncome = :param")
     fun getIncome(param: Boolean = true): LiveData<Double>
 
+    @Query("SELECT SUM(sum) FROM cash_table WHERE isIncome = :param")
+    fun getTotalCash(param: Boolean = true): LiveData<Double>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(CashTable: CashTable)
 
